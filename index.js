@@ -176,22 +176,32 @@ function isWhat(n) {
 // another rod, on top of the other disks that may already be present on that rod. 
 // iii) A larger disk may not placed on top of a smaller disk
 
-// function tower(a, b, c, height) {
-  
-//   if(height === 0) return
-    
-//   tower(a, b, c, height - 1)
-// }
+// Hint / steps:
+// Move disk from Tower A to Tower C
+// Move disk from Tower A to Tower B 
+// Move disk from Tower C to Tower B 
+// Move disk from Tower A to Tower C 
+// Move disk from Tower B to Tower A 
+// Move disk from Tower B to Tower C 
+// Move disk from Tower A to Tower C
 
-// tower([1,2,3], [], [])
-
-function TOH(n, source, temp, dest) { //n= 2
-  if(n === 1) {
-    print(source, dest)
+function TOH(disc, pillars, src, dest, spare) {
+  if(disc === 1) {
+    pillars = move(pillars, src, dest)
+  } 
+  else {
+    TOH(disc - 1, pillars, src, spare, dest)
+    pillars = move(pillars, src, dest)
+    TOH(disc - 1, pillars, spare, dest, src)
   }
-  TOH(n-1, source, temp, dest) //n = 1
+  return pillars
 }
-function print(source, dest) {
-  console.log(`Moving from ${source} to ${dest}`)
+
+function move(pillars, src, dest) {
+  console.log(`Move ${src} to ${dest}`)
+  pillars[dest].unshift(pillars[src].shift())
+  return pillars
 }
-TOH(1, A, B, C)
+pillars = {'a': [1, 2, 3], 'b': [], 'c': []}
+TOH(3, pillars, 'a', 'c', 'b')
+console.log(pillars)
