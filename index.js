@@ -176,11 +176,22 @@ function isWhat(n) {
 // another rod, on top of the other disks that may already be present on that rod. 
 // iii) A larger disk may not placed on top of a smaller disk
 
-function tower(a, b, c, height) {
+// function tower(a, b, c, height) {
   
-  if(height === 0) return
+//   if(height === 0) return
     
-  tower(a, b, c, height - 1)
-}
+//   tower(a, b, c, height - 1)
+// }
 
-tower([1,2,3], [], [])
+// tower([1,2,3], [], [])
+
+function TOH(n, source, temp, dest) { //n= 2
+  if(n === 1) {
+    print(source, dest)
+  }
+  TOH(n-1, source, temp, dest) //n = 1
+}
+function print(source, dest) {
+  console.log(`Moving from ${source} to ${dest}`)
+}
+TOH(1, A, B, C)
